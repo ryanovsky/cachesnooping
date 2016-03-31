@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Cachesnooping : ">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Cachesnooping</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/ryanovsky/cachesnooping">View on GitHub</a>
+
+          <h1 id="project_title">Cachesnooping</h1>
+          <h2 id="project_tagline"></h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/ryanovsky/cachesnooping/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/ryanovsky/cachesnooping/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h3>
+<a id="summary" class="anchor" href="#summary" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Summary</h3>
+
+<p>We are going to simulate different snooping based cache coherence protocols including MESI, MSI and analyze cache statistic differences.
+We will compare the performance of MESI, MSI, write back update protocols.
+We will compare bus traffic stats, including number of contenders and how many times each core has won the bus</p>
+
+<h3>
+<a id="background" class="anchor" href="#background" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Background</h3>
+
+<p>There are several different implementations of cache coherence protocols, some of the foremost protocols are the MSI, MESI, and Dragon protocols. With each of these, we will look at the performance of the same programs (or a set of programs) for each of these protocols on a simulated processor. This way, we can look at specifically how bus traffic and interconnect contention affect program performance.</p>
+
+<p>Our simulator will only look at the bus arbitration for an L1 cache.</p>
+
+<h3>
+<a id="the-challenge" class="anchor" href="#the-challenge" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The Challenge</h3>
+
+<p>We will need to simulate a variable core processor, where each core contains an L1 cache. For each core, we need to keep track of the cache hits, cache misses, the number of times this core has contended for the bus, the number of times this core has won the bus.</p>
+
+<h3>
+<a id="resources" class="anchor" href="#resources" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Resources</h3>
+
+<p>We want to modify existing code to simulate our processor, but we will be implementing the MSI and MESI FSMs, as well as the simulator ourselves. We will use the Contech to generate memory traces of parallel programs so analyze and simulate the cache interactions on our processor.</p>
+
+<h3>
+<a id="goals-and-deliverables" class="anchor" href="#goals-and-deliverables" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Goals and Deliverables</h3>
+
+<p>By the end of the project, we should have analysis on how MESI and MSI protocols affect bus traffic, as well as how the bus traffic changes as the number of cores increases. We will also measure memory latency for each core, and total latency for the program given each protocol and the number of cores on the processor.</p>
+
+<h3>
+<a id="platform-choice" class="anchor" href="#platform-choice" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Platform Choice</h3>
+
+<p>Seeing as we are simulating the processor, the machine we run on doesn’t need any special hardware. We will use C++ to write our simulator and cache coherence implementation</p>
+
+<h3>
+<a id="schedule" class="anchor" href="#schedule" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Schedule</h3>
+
+<p>April 4 - 10 : simulate a single cache and processor - that reads in Contech traces
+April 11 - 17 : implement MESI/MSI protocol
+April 18 - 24 : add transactional memory
+April 25 - May 1: Look at meaningful statistics and analyze
+May 2 - May 9: Create presentation</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Cachesnooping maintained by <a href="https://github.com/ryanovsky">ryanovsky</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
