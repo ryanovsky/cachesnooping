@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-    <title>Transactional Memory Simulator</title>
+    <title>Cachesnooping</title>
   </head>
 
   <body>
@@ -34,23 +34,30 @@
         <h3>
 <a id="summary" class="anchor" href="#summary" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Summary</h3>
 
-<p>We are going to simulate the MESI protocol with a variable number of cores in a processor, as well as transactional memory using the lazy optimistic scheme. We will then use our simulation to measure bus traffic and contention, as well as transactional memory commits and aborts.</p>
+<p>We are going to simulate MESI protocol with various number of caches and processors, in order to analyze useful statistics.</p>
+
+<p>We are then going to implement transactional memory using the lazy optimistic scheme, to allow the user to have synchronization between caches.
+We will compare bus traffic stats, including number of contenders and cache hits/misses/evictions</p>
 
 <h3>
 <a id="background" class="anchor" href="#background" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Background</h3>
 
-<p>There are several different implementations of cache coherence protocols, some of the foremost protocols are the MSI, MESI, and Dragon protocols. We will implement the MESI protocol, which is similar to the MSI, except for the added exclusive state which adds the benefit of decreased bus traffic. We will add a layer of transactional memory on top of the MESI implementation.
-We will use the lazy versioning scheme of transactional memory, which logs memory updates into a transaction write buffer. The buffer is then flushed to memory upon a commit. In order to detect conflicts between multiple processors we will use optimistic detection. Optimistic conflict detection only checks for conflicts when a transaction attempts to commit. When a conflict occurs, the committing transaction gets priority, while the other transaction must abort and restart later.</p>
+<p>There are several different implementations of cache coherence protocols, some of the foremost protocols are the MSI, MESI, and Dragon protocols. We will implement the MESI protocol, which is similar to the MSI, except for the added exclusive state which adds the benefit of decreased bus traffic.</p>
+
+<p>We will use the lazy versioning scheme of transactional memory, which logs memory updates into a transaction write buffer.  The buffer is then flushed to memory upon a commit. In order to detect conflicts between multiple processors we will use optimistic detection.  Optimistic detection only checks for conflicts when a transaction attempts to commit.  When a conflict occurs, the committing transaction gets priority, while the other transaction must restart.</p>
+
+<p>Our simulator will only look at the bus arbitration for an L1 cache.</p>
 
 <h3>
 <a id="the-challenge" class="anchor" href="#the-challenge" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The Challenge</h3>
 
-<p>We will need to simulate a variable core processor, where each core contains an L1 cache. For each core, we need to keep track of the cache hits, cache misses, the number of times this core has contended for the bus, and the number of times this core has won the bus. We will also have to learn how to use Contech in order to generate memory traces to test our simulations with. Lastly we will implement a simulation of transactional memory, which will provide the added benefit of synchronization between caches.</p>
+<p>We will need to simulate a variable core processor, where each core contains an L1 cache. For each core, we need to keep track of the cache hits, cache misses, the number of times this core has contended for the bus, and the number of times this core has won the bus. We will also have to learn about the Contech framework, and the implementations of a task graph,  in order to use the resulting task graphs to simulate cache coherence.  Lastly we will implement a simulation of transactional memory, which will provide the added benefit of synchronization between caches.</p>
 
 <h3>
 <a id="resources" class="anchor" href="#resources" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Resources</h3>
 
-<p>We will be using the information presented in lecture slides to implement the MESI protocol and transactional memory. We will use the Contech to generate memory traces of parallel programs to analyze and simulate the cache interactions on our processor.</p>
+<p>We will be using the information presented in lecture slides to implement the MESI protocol as well as transactional memory.<br>
+We will use the Contech to generate memory traces of parallel programs so analyze and simulate the cache interactions on our processor.</p>
 
 <h3>
 <a id="goals-and-deliverables" class="anchor" href="#goals-and-deliverables" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Goals and Deliverables</h3>
@@ -60,16 +67,16 @@ We will use the lazy versioning scheme of transactional memory, which logs memor
 <h3>
 <a id="platform-choice" class="anchor" href="#platform-choice" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Platform Choice</h3>
 
-<p>Seeing as we are simulating the processor, the machine we run on doesn’t need any special hardware. We will use C++ to write our simulator and cache coherence implementation.</p>
+<p>Seeing as we are simulating the processor, the machine we run on doesn’t need any special hardware. We will use C++ to write our simulator and cache coherence implementation..</p>
 
 <h3>
 <a id="schedule" class="anchor" href="#schedule" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Schedule</h3>
 
-<p>April 4 - 10 : Implement a single-core processor that reads in Contech memory traces<br>
-April 11 - 17 : Implement MESI cache coherence protocol on a multi-core processor<br>
-April 18 - 24 : Add transactional memory to the multi-core processor<br>
-April 25 - May 1: Measure bus traffic and contention, and TM commits and aborts<br>
-May 2 - May 9: Analyze measurements and create presentations</p>
+<p>April 4 - 10 : simulate a single cache and processor that reads in Contech traces<br>
+April 11 - 17 : implement MESI protocol<br>
+April 18 - 24 : add transactional memory<br>
+April 25 - May 1: Look at meaningful statistics and analyze<br>
+May 2 - May 9: Create presentation</p>
       </section>
     </div>
 
